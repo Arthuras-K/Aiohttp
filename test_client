@@ -1,0 +1,49 @@
+import asyncio
+from pprint import pprint
+from aiohttp import ClientSession
+
+
+async def main():
+
+
+    async with ClientSession() as session:
+
+        response = await session.post('http://127.0.0.1:8080/announcements/', 
+            json={'owner': 'Mavrody', 
+                'password': 'MMM123', 
+                'title': 'Sell my currency', 
+                'descriptione': 'Cheap, anonymous, fast selling beautiful banknotes with my portrait', 
+                }
+            )
+        print(response.status)
+        pprint(await response.json())
+        print()
+
+        response = await session.get('http://127.0.0.1:8080/announcements/1')
+        print(response.status)
+        pprint(await response.json())
+        print()
+
+        response = await session.patch('http://127.0.0.1:8080/announcements/1', json={
+                'owner': 'Mavrody', 
+                'password': 'MMM123', 
+                'title': 'Sales!!!'})
+        print(response.status)
+        pprint(await response.json())
+        print()
+
+        response = await session.get('http://127.0.0.1:8080/announcements/1')
+        print(response.status)
+        pprint(await response.json())
+        print()
+
+        response = await session.delete('http://127.0.0.1:8080/announcements/1')
+        print(response.status)
+        pprint(await response.json())
+        print()
+
+        response = await session.get('http://127.0.0.1:8080/announcements/1')
+        print(response.status)
+        pprint(await response.json())
+
+asyncio.run(main())

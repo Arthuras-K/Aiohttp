@@ -16,8 +16,10 @@ class Announcement(BaseModel):
     __tablename__ = 'announcement'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    username = Column(String, unique=True, index=True, nullable=False)
+    owner = Column(String, unique=True, index=True, nullable=False)
     password = Column(String, nullable=False)
+    title = Column(String, nullable=False)
+    descriptione = Column(String, nullable=False)
     creation_time = Column(DateTime, server_default=func.now()) 
-    email = Column(String)
+
 
